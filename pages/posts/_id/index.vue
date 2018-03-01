@@ -1,62 +1,100 @@
 <template>
     <div class="single-post-page">
         <section class="post">
-            <h1 class="post-title">Titulo</h1>
+            <h1 class="post-title">{{artigoTitulo}}</h1>
+            <h3>{{hiperligacaoLegenda}}</h3>
             <div class="post-details">
-                <div class="post-details">Atualizado em:</div>
-                <div class="post-details">Autor:</div>
+                <div><strong>{{autorNome}} </strong></div>
+                <div> - {{autorData}}</div>
             </div>
-            <p class="post-content">Conteudos</p>
+            <br>
+            <blockquote>{{artigoResumo}}</blockquote>
+            <br>
+            <p class="post-content">{{artigoTexto}}</p>
         </section>
         <section class="post-feedback">
-            <p>feedback</p>
+          
         </section>
     </div>
 </template>
 
 <script>
+// categoria
+// nivel
+// artigoTitulo
+// artigoResumo
+// artigoTexto
+// artigoFoto
+// artigoFotoLegenda
+// hiperligacaoLegenda
+// hiperligacaoLink
+// autorNome
+// autorData
+// autorFoto
     export default {
-        
+        data() {
+          return {
+            id:'1',
+            categoria: 'Legislação',
+            nivel:'Pré-escolar',
+            artigoTitulo:'Alteração ao currículo',
+            artigoResumo:"Atualização curricular do	2º ciclo geral e especializado, 3º ciclo geral e especializado e CEFs",
+            artigoTexto:"a)	2º ciclo geral e especializado (quadro II, III) b)	3º ciclo geral e especializado (quadro IV, V)c)	CEF (quadro VI)a)	2º ciclo geral e especializado (quadro II, III) b)	3º ciclo geral e especializado (quadro IV, V)c)	CEF (quadro VI)a)	2º ciclo geral e especializado (quadro II, III) b)	3º ciclo geral e especializado (quadro IV, V)c)	CEF (quadro VI)",
+            artigoFoto:'',
+            artigoFotoLegenda:'',
+            hiperligacaoLegenda:"Despacho 5908/2017",
+            hiperligacaoLink:'',
+            autorNome:"Cristiana Silva",
+            autorData:"21 de Fevereiro, 2018",
+            autorFoto:''
+          }
+        }
     }
 </script>
 
 <style scoped>
 .single-post-page {
-  padding: 30px;
-  text-align: center;
-  box-sizing: border-box;
+
+
+  display: flex;
+  justify-content: center;
+
 }
 
 .post {
+  max-width: 550px;  
+  box-sizing: border-box;
+  margin: 30px;
+  margin-top: 60px;
+  padding: 30px;
+  text-align: justify;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
   width: 100%;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .post {
     width: 600px;
     margin: auto;
   }
-}
+} */
 
 .post-title {
   margin: 0;
 }
 
 .post-details {
-  padding: 10px;
-  box-sizing: border-box;
-  border-bottom: 3px solid #ccc;
+  padding-top: 10px;
+  border-bottom: 3px solid green;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  color:green;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .post-details {
     flex-direction: row;
   }
-}
+} */
 
 .post-detail {
   color: rgb(88, 88, 88);
@@ -67,7 +105,16 @@
   color: red;
   text-decoration: none;
 }
-
+blockquote {
+  font-style: italic;
+  color: grey;
+}
+blockquote:before{
+        content:"\201C";
+        }
+blockquote:after{
+        content:"\201C";
+        }
 .post-feedback a:hover,
 .post-feedback a:active {
   color: salmon;

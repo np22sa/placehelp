@@ -21,6 +21,7 @@
     </nuxt-link>
 </template>
 <script>
+//import { faAngleDoubleDown } from '@fortawesome/fontawesome-pro-regular'
     export default{
         name: 'PostPreview',
         props:{

@@ -11,7 +11,7 @@
       <ul
         class="nav-list"
         @click="$emit('close')">
-        <li class="nav-item"><nuxt-link :to="'/posts/'+ 1">Legislação</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/posts/">Legislação</nuxt-link></li>
         <li class="nav-item"><nuxt-link :to="'/posts/'+ 2">Procedimentos</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/info">Comentários</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/admin">!</nuxt-link></li>

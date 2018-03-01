@@ -50,7 +50,7 @@ components: {
   text-align: center;
   height: 100%;
 }
-.links {
+/* .links {
   padding-top: 15px;
-}
+} */
 </style>
