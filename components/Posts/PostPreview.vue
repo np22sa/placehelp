@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="'/posts/'+id">
+    <nuxt-link :to="postLink">
         <figure class="preview">
             <blockquote class="preview__text">
                 <h2>{{artigoTitulo}}</h2>
@@ -29,6 +29,12 @@
                 type:String,
                 required: true
             },
+
+            isAdmin:{
+                type: Boolean,
+                required:true
+                },
+
             categoria: {
                 type:String,
                 required:true
@@ -77,6 +83,11 @@
                 type: String,
                 required: false
             }                        
+        },
+        computed: {
+            postLink(){
+                return this.isAdmin ? '/admin/' + this.id : '/posts/' +this.id
+            }
         }
     }
 </script>

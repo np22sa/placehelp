@@ -1,12 +1,14 @@
 <template>
    <div class="lista" :style="{ flexFlow: orientation + ' wrap' }"> <!--v-bind:style="{ flex-direction: orientation}" -->
       <post-preview id="1"
+                    :is-admin="isAdmin"
                     categoria="legislacao" 
                     artigoTitulo="ahaha" 
                     artigoResumo="lorem50"
                     autorNome="Cristiana Silva" 
                     autorData="28 de Fevereiro, 2018" />
       <post-preview id="2"
+                    :is-admin="isAdmin"      
                     categoria="legislacao" 
                     artigoTitulo="Alteração ao currículo"
                     hiperligacaoLegenda="Despacho 5908/2017" 
@@ -17,6 +19,7 @@
                     autorNome="Cristiana Silva" 
                     autorData="21 de Fevereiro, 2018" />
       <post-preview id="3"
+                    :is-admin="isAdmin"      
                     categoria="legislacao" 
                     artigoTitulo="Alteração ao currículo"
                     hiperligacaoLegenda="Despacho 5908/2017" 
@@ -40,6 +43,10 @@ components: {
     orientation: {
       type: String,
       default: 'column'
+    },
+    isAdmin:{
+      type: Boolean,
+      default: false
     }
   }
 };
