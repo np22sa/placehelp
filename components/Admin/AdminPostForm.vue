@@ -1,14 +1,15 @@
 <template>
     <form @submit.prevent="onSave">
-        <app-control-input v-model="editedPost.categoria">categoria</app-control-input>
+        <app-control-input v-model="editedPost.categoria">Categoria</app-control-input>
         <app-control-input v-model="editedPost.artigoTitulo">Título</app-control-input>
-        <app-control-input v-model="editedPost.autorNome">nome</app-control-input>
-        <app-control-input v-model="editedPost.hiperligacaoLegenda">sub-titulo</app-control-input>
-        <app-control-input v-model="editedPost.hiperligacaoLink">link</app-control-input> 
+        <app-control-input v-model="editedPost.autorNome">Nome</app-control-input>
+        <app-control-input v-model="editedPost.hiperligacaoLegenda">Sub-titulo</app-control-input>
+        <app-control-input v-model="editedPost.hiperligacaoLink">Link</app-control-input> 
         <app-control-input control-type="textarea" v-model="editedPost.artigoResumo">Resumo</app-control-input>               
         <app-control-input control-type="textarea" v-model="editedPost.artigoTexto">Texto</app-control-input>               
-        <app-button type="button" btn-style="cancel" @click="onCancel">Cancelar</app-button>
-        <app-button type="submit" style="margin-left: 10px">Gravar</app-button>
+        <div class="alinhaBotoes">
+        <app-button type="button" btn-style="normal" @click="onCancel">Cancelar</app-button>
+        <app-button type="submit" btn-style="inverted">Gravar</app-button></div>
     </form>
 </template>
 
@@ -54,5 +55,11 @@
 </script>
 
 <style scoped>
-
+.alinhaBotoes{
+    display: flex;
+    justify-content: flex-end;
+}
+.alinhaBotoes > * {
+    margin-left: 10px
+}
 </style>

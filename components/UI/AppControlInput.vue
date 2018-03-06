@@ -38,6 +38,7 @@ export default {
 .input-control label {
   display: block;
   font-weight: bold;
+  color: #3b8070;
 }
 
 .input-control input,
@@ -47,6 +48,7 @@ export default {
   box-sizing: border-box;
   font: inherit;
   border: 1px solid #ccc;
+  border-radius: 4px;
   padding: 5px;
 }
 
