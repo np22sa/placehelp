@@ -76,7 +76,7 @@
                 required: true
             },
             autorData: {
-                type: String,
+                type: Date,
                 required: true
             },
             autorFoto: {
