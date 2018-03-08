@@ -1,12 +1,14 @@
 <template>
-    <nuxt-link :to="postLink">
+    
         <figure class="preview">
+           <nuxt-link :to="postLink"> 
             <blockquote class="preview__text">
                 <h2>{{artigoTitulo}}</h2>
                 <h4>{{hiperligacaoLegenda}}</h4>
                 <br>
-                <pre>{{artigoResumo}}</pre>                
+                <pre>{{artigoResumo}}</pre>             
             </blockquote>
+        </nuxt-link>        
             <figcaption class="preview__user">
                 <img src="~assets/images/FotoHandler.jpg" alt="" class="preview__photo">
                 <div class="preview__user-box">
@@ -14,11 +16,16 @@
                     <p class="preview__user-date">{{autorData | date}}</p>
                       
                 </div>
-                <div class="preview__link">&infin;</div>  
+                <div class="preview__link">
+                    <span>&#x270e; </span>
+                    <a :href="hiperligacaoLink" :title="hiperligacaoLegenda" target="blank" v-if="!!hiperligacaoLink">&#x26D3;</a>
+                    <!--  &#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;  -->
+                </div>
+                
             </figcaption>
 
         </figure>
-    </nuxt-link>
+
 </template>
 <script>
 //import { faAngleDoubleDown } from '@fortawesome/fontawesome-pro-regular'
@@ -110,6 +117,9 @@
         width: 450px;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         /* height: 100%; */
     }
     .preview__text{
@@ -143,7 +153,7 @@
     .preview__user-date{
         font-size:0.7rem; 
     }
-    .preview__link{
+    .preview__link > * {
         color: green;
         font-size: 2.2rem;
         font-weight: 300;

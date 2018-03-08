@@ -7,7 +7,8 @@
                     :is-admin="isAdmin"
                     :categoria="post.categoria" 
                     :artigoTitulo="post.artigoTitulo"
-                    :hiperligacaoLegenda="post.hiperligacaoLegenda" 
+                    :hiperligacaoLegenda="post.hiperligacaoLegenda"
+                    :hiperligacaoLink="post.hiperligacaoLink" 
                     :artigoResumo="post.artigoResumo"
                     :autorNome="post.autorNome" 
                     :autorData="post.autorData" />                    
