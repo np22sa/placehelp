@@ -68,4 +68,9 @@ html
   color: #fff;
   background-color: #35495e;
 }
+pre{
+    font-family: "Segoe UI";
+    white-space: pre-wrap;
+    word-wrap:break-word;
+}
 </style>

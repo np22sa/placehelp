@@ -1,16 +1,16 @@
 <template>
     <div class="single-post-page">
         <section class="post">
-            <h1 class="post-title">{{artigoTitulo}}</h1>
-            <h3>{{hiperligacaoLegenda}}</h3>
+            <h1 class="post-title">{{loadedPost.artigoTitulo}}</h1>
+            <h3>{{loadedPost.hiperligacaoLegenda}}</h3>
             <div class="post-details">
-                <div><strong>{{autorNome}} </strong></div>
-                <div> - {{autorData}}</div>
+                <div><strong>{{loadedPost.autorNome}}</strong></div>
+                <div><small>: {{loadedPost.autorData | date}}</small></div>
             </div>
             <br>
-            <blockquote>{{artigoResumo}}</blockquote>
+            <pre class="blockquote">{{loadedPost.artigoResumo}}</pre>
             <br>
-            <p class="post-content">{{artigoTexto}}</p>
+            <pre class="post-content">{{loadedPost.artigoTexto}}</pre>
         </section>
         <section class="post-feedback">
           
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 // categoria
 // nivel
 // artigoTitulo
@@ -31,25 +32,16 @@
 // autorNome
 // autorData
 // autorFoto
-    export default {
-        data() {
-          return {
-            id:'1',
-            categoria: 'Legislação',
-            nivel:'Pré-escolar',
-            artigoTitulo:'Alteração ao currículo',
-            artigoResumo:"Atualização curricular do	2º ciclo geral e especializado, 3º ciclo geral e especializado e CEFs",
-            artigoTexto:"a)	2º ciclo geral e especializado (quadro II, III) b)	3º ciclo geral e especializado (quadro IV, V)c)	CEF (quadro VI)a)	2º ciclo geral e especializado (quadro II, III) b)	3º ciclo geral e especializado (quadro IV, V)c)	CEF (quadro VI)a)	2º ciclo geral e especializado (quadro II, III) b)	3º ciclo geral e especializado (quadro IV, V)c)	CEF (quadro VI)",
-            artigoFoto:'',
-            artigoFotoLegenda:'',
-            hiperligacaoLegenda:"Despacho 5908/2017",
-            hiperligacaoLink:'',
-            autorNome:"Cristiana Silva",
-            autorData:"21 de Fevereiro, 2018",
-            autorFoto:''
-          }
-        }
-    }
+export default {
+  asyncData(context){
+    return axios.get('https://place-63c32.firebaseio.com/posts/' + context.params.id + '.json')
+    .then(res=>{
+      return {
+        loadedPost: res.data
+      }
+    })
+    .catch(e => context.error(e))
+  }}
 </script>
 
 <style scoped>
@@ -105,14 +97,14 @@
   color: red;
   text-decoration: none;
 }
-blockquote {
+.blockquote {
   font-style: italic;
   color: grey;
 }
-blockquote:before{
+.blockquote:before{
         content:"\201C";
         }
-blockquote:after{
+.blockquote:after{
         content:"\201C";
         }
 .post-feedback a:hover,

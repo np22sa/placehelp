@@ -5,13 +5,13 @@
                 <h2>{{artigoTitulo}}</h2>
                 <h4>{{hiperligacaoLegenda}}</h4>
                 <br>
-                <p>{{artigoResumo}}</p>                
+                <pre>{{artigoResumo}}</pre>                
             </blockquote>
             <figcaption class="preview__user">
                 <img src="~assets/images/FotoHandler.jpg" alt="" class="preview__photo">
                 <div class="preview__user-box">
                     <p class="preview__user-name">{{autorNome}}</p>
-                    <p class="preview__user-date">{{autorData}}</p>
+                    <p class="preview__user-date">{{autorData | date}}</p>
                       
                 </div>
                 <div class="preview__link">&infin;</div>  
@@ -76,7 +76,7 @@
                 required: true
             },
             autorData: {
-                type: Date,
+                type:undefined,
                 required: true
             },
             autorFoto: {
@@ -87,6 +87,12 @@
         computed: {
             postLink(){
                 return this.isAdmin ? '/admin/' + this.id : '/posts/' +this.id
+            }
+        },
+        filters: {
+            formataData(dados){
+                //.split("").reverse().join("")
+                return new Date(dados).toString().slice(0,10)
             }
         }
     }
@@ -110,8 +116,11 @@
         margin-bottom:3rem;
         z-index: 10;
         text-align: justify;
+        
+        
         position: relative;
     }
+
     .preview__user{
         display: flex;
         align-items: center;
