@@ -1,6 +1,6 @@
 <template>
     
-        <figure class="preview">
+        <figure class="preview" :class="'categoria' + calculaCategoria">
            <nuxt-link :to="postLink"> 
             <blockquote class="preview__text">
                 <h2>{{artigoTitulo}}</h2>
@@ -17,9 +17,9 @@
                       
                 </div>
                 <div class="preview__link">
-                    <span>&#x270e; </span>
+                    <span>&#x270e;</span>
                     <a :href="hiperligacaoLink" :title="hiperligacaoLegenda" target="blank" v-if="!!hiperligacaoLink">&#x26D3;</a>
-                    <!--  &#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;  -->
+                    <!--  &#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->
                 </div>
                 
             </figcaption>
@@ -94,6 +94,9 @@
         computed: {
             postLink(){
                 return this.isAdmin ? '/admin/' + this.id : '/posts/' +this.id
+            },
+            calculaCategoria(){
+                if (this.categoria == 'Legislação') { return '2'} else if (this.categoria == 'Comentários') { return '1'} else {return ''}
             }
         },
         filters: {
@@ -158,7 +161,7 @@
         font-size: 2.2rem;
         font-weight: 300;
     }
-    .preview:before{
+    .categoria2:before{
         content:"\201C";
         position: absolute;
         top: -2.75rem;
@@ -168,4 +171,42 @@
         color: #f0f0f0;
         font-family: sans-serif;
     }
+    .categoria1:before{
+        content:"\0040";
+        position: absolute;
+        /* top: -1.3rem;
+        left: -1rem;
+        line-height: 1;
+        font-size: 6rem; */
+        top: -1.8rem;
+        left: -1.4rem;
+        line-height: 1;
+        font-size: 8rem;
+        color: #f0f0f0;
+        font-family: sans-serif;
+    }
+    .categoria:before{
+        content:"\0026";
+        position: absolute;
+        /* top: -1.5rem;
+        left: -1rem;
+        line-height: 1;
+        font-size: 9.4rem; */
+        top: -2.5rem;
+        left: -1rem;
+        line-height: 1;
+        font-size: 10.5rem;
+        color: #f0f0f0;
+        font-family: sans-serif;
+    }
+    /* .categoria:before{
+        content:"\0023";
+        position: absolute;
+        top: -2.5rem;
+        left: -0.2rem;
+        line-height: 1;
+        font-size: 10.5rem;
+        color: #f0f0f0;
+        font-family: sans-serif;
+    }     */
 </style>
