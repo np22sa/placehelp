@@ -1,11 +1,10 @@
 <template>
     <div class="admin-page">
         <section class="new-post">
-            <app-button btn-style="inverted" @click="$router.push('/admin/new-post')">Novo</app-button>
+            <app-button btn-style="inverted" @click="$router.push('/admin/new-post')">Nova Entrada</app-button>
         </section>
         <section class="existing-posts">
-            <h1>Lista de Entradas</h1>
-            <PostList isAdmin :posts="loadedPosts" />
+            <PostList orientation='row' isAdmin :posts="loadedPosts" />
         </section>
     </div>
 </template>
@@ -27,6 +26,9 @@ import AppButton from '@/components/UI/AppButton'
 </script>
 
 <style scoped>
+.new-post{
+    margin-top: 30px;
+}
 .admin-page{
     display: flex;
     flex-direction: column;

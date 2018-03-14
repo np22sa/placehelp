@@ -10,3 +10,12 @@
 {
     opacity: 0;
 }
+
+.centrado {
+    display: flex;
+    justify-content: center;
+}
+
+em {
+    background-color: #41B883;
+}

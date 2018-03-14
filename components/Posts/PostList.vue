@@ -10,7 +10,8 @@
                     :hiperligacaoLegenda="post.hiperligacaoLegenda"
                     :hiperligacaoLink="post.hiperligacaoLink" 
                     :artigoResumo="post.artigoResumo"
-                    :autorNome="post.autorNome" 
+                    :autorNome="post.autorNome"
+                    :autorFoto="post.autorFoto" 
                     :autorData="post.autorData" />                    
   </div>
 </template>

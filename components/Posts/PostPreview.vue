@@ -10,16 +10,16 @@
             </blockquote>
         </nuxt-link>        
             <figcaption class="preview__user">
-                <img src="~assets/images/FotoHandler.jpg" alt="" class="preview__photo">
+                <img :src="autorFoto" alt="" class="preview__photo">
                 <div class="preview__user-box">
                     <p class="preview__user-name">{{autorNome}}</p>
                     <p class="preview__user-date">{{autorData | date}}</p>
                       
                 </div>
                 <div class="preview__link">
-                    <span>&#x270e;</span>
                     <a :href="hiperligacaoLink" :title="hiperligacaoLegenda" target="blank" v-if="!!hiperligacaoLink">&#x26D3;</a>
-                    <!--  &#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->
+                    <span>&#8285;</span>
+                    <!--  &#x270e;&#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->
                 </div>
                 
             </figcaption>

@@ -33,7 +33,10 @@ module.exports = {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: ['~plugins/date-filter.js'],
+    plugins: [
+        '~plugins/date-filter.js',
+        '~plugins/vue-instantsearch.js'
+    ],
 
     /*
      ** Nuxt.js modules
