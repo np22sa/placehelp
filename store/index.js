@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import axios from 'axios'
+import Cookie from 'js-cookie'
 
 const createStore = () => {
     return new Vuex.Store({
@@ -73,16 +74,60 @@ const createStore = () => {
                         returnSecureToken: true
                     }).then(res => {
                         vuexContext.commit('setToken', res.idToken);
-                        vuexContext.dispatch('setLogoutTimer', res.expiresIn * 1000);
+                        localStorage.setItem('token', res.idToken);
+                        localStorage.setItem('tokenExpiration', new Date().getTime() + +res.expiresIn * 1000);
+                        Cookie.set('jwt', res.idToken);
+                        Cookie.set('expirationDate', new Date().getTime() + +res.expiresIn * 1000)
+                            //vuexContext.dispatch('setLogoutTimer', res.expiresIn * 1000);
                         vuexContext.commit('setEnrre', '');
                     })
                     .catch(e => { vuexContext.commit('setEnrre', e.response.data.error.message) })
                     //.catch(e=> authData.error= e.response.data.error.message)
             },
-            setLogoutTimer(vuexContext, duration) {
-                setTimeout(() => {
-                    vuexContext.commit('clearToken')
-                }, duration)
+            // setLogoutTimer(vuexContext, duration) {
+            //     setTimeout(() => {
+            //         vuexContext.commit('clearToken')
+            //     }, duration)
+            // },
+            initAuth(vuexContext, req) { //req isServer
+                let token;
+                let expirationDate;
+                if (req) {
+                    if (!req.headers.cookie) {
+                        return;
+                    }
+                    const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
+                    if (!jwtCookie) {
+                        return;
+                    }
+                    token = jwtCookie.split('=')[1];
+                    expirationDate = req.headers.cookie.split(';').find(c => c.trim().startsWith('expirationDate=')).split('=')[1];
+                } else {
+                    token = localStorage.getItem("token");
+                    expirationDate = localStorage.getItem("tokenExpiration");
+
+                    // if (new Date().getTime() > +expirationDate || !token) {
+                    //     vuexContext.commit('clearToken')
+                    //     return;
+                    // }
+                }
+                if (new Date().getTime() > +expirationDate || !token) {
+                    console.log('No token or invalid token');
+                    //vuexContext.commit('clearToken');
+                    vuexContext.dispatch('logout');
+                    return;
+                }
+                //vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime());
+                vuexContext.commit("setToken", token);
+            },
+            logout(vuexContext) {
+                vuexContext.commit('clearToken');
+                Cookie.remove('jwt');
+                Cookie.remove('expirationDate');
+                if (process.client) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('tokenExpiration');
+                }
             }
         },
         getters: {

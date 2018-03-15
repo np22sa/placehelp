@@ -17,6 +17,7 @@
                       
                 </div>
                 <div class="preview__link">
+                    <a v-if="!!$store.state.token" :href="'/admin/' + this.id">&#x270e;</a>
                     <a :href="hiperligacaoLink" :title="hiperligacaoLegenda" target="blank" v-if="!!hiperligacaoLink">&#x26D3;</a>
                     <span>&#8285;</span>
                     <!--  &#x270e;&#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->

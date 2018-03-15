@@ -18,8 +18,10 @@
       <ul class="nav-list">
         <li class="nav-item"><nuxt-link to="/posts/">Últimas</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/info">Procedimentos</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/admin">Editar</nuxt-link></li>
       </ul>
+      <button v-if="!!$store.state.token" class="button--green" @click="onLogout" >Logout</button>
+      <button v-else @click="$router.push('/admin')" class="button--green">Login</button>
     </div>
     <TheSideNavToggle @toggle="$emit('sidenavToggle')" />    
   </header>
@@ -35,12 +37,32 @@ export default {
   components: {
     Logo,
     TheSideNavToggle
+  },
+  methods: {
+    onLogout(){
+      this.$store.dispatch("logout");
+      this.$router.push("/"); ///admin/auth)
+    }
   }
 };
 </script>
 
 
 <style scoped>
+/*.button {
+  font: inherit;
+  cursor: pointer;  
+  border-radius: 4px;
+  border: 1px solid #3b8070;
+  color: #3b8070;
+  text-decoration: none;
+  padding: 10px 30px;  
+}
+ .button:hover,
+.button:active {
+  color: #fff;
+  background-color: #3b8070;  
+} */
 .header-container {
   padding: 10px;
   /* height: 60px; */
@@ -81,7 +103,7 @@ export default {
 
 @media (min-width: 768px) {
   .navigation-items {
-    display: block;
+    display: flex;
   }
 }
 
@@ -90,6 +112,7 @@ export default {
   padding: 0;
   margin: 0;
   display: flex;
+  align-items: center;
 }
 
 .nav-item {
