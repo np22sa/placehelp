@@ -20,8 +20,11 @@
         <li class="nav-item"><nuxt-link to="/info">Procedimentos</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/admin">Editar</nuxt-link></li>
       </ul>
-      <button v-if="!!$store.state.token" class="button--green" @click="onLogout" >Logout</button>
-      <button v-else @click="$router.push('/admin')" class="button--green">Login</button>
+      <!-- <button v-if="!!$store.state.token" class="button--green" @click="onLogout" >Logout</button>
+      <button v-else @click="$router.push('/admin')" class="button--green">Login</button> -->
+      <button v-if="$store.state.token==null" @click="$router.push('/admin')" class="button--green">Login</button>
+      <button v-else class="button--green" @click="onLogout" >Logout</button>
+      
     </div>
     <TheSideNavToggle @toggle="$emit('sidenavToggle')" />    
   </header>

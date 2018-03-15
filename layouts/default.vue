@@ -19,7 +19,8 @@ export default {
     return{
       displaySidenav: false
     }
-  }
+  },
+  middleware: 'check-auth',
 };
 </script>
 <style>
