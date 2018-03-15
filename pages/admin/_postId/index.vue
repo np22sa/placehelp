@@ -15,6 +15,10 @@ import axios from 'axios'
         components:{
             AdminPostForm
         },
+        //props:{ duplicate: {
+        //         type: Boolean,
+        //         default: false
+        //         }},
         asyncData(context){
             return axios.get('https://place-63c32.firebaseio.com/posts/' + context.params.postId + '.json')
             .then(res=>{
