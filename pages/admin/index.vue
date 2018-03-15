@@ -3,7 +3,7 @@
         <section class="new-post">
             <app-button btn-style="inverted" @click="$router.push('/admin/new-post')">Nova Entrada</app-button>
         </section>
-        <section class="existing-posts">
+        <section class="existing-posts container">
             <PostList orientation='row' isAdmin :posts="loadedPosts" />
         </section>
     </div>
@@ -17,6 +17,7 @@ import AppButton from '@/components/UI/AppButton'
             AppButton,
             PostList
         } ,
+        middleware: 'auth',
         computed: {
         loadedPosts(){
             return this.$store.getters.loadedPosts

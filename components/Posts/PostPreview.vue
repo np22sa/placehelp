@@ -1,6 +1,6 @@
 <template>
     
-        <figure class="preview" :class="'categoria' + calculaCategoria">
+        <figure class="preview mb" :class="'categoria' + calculaCategoria">
            <nuxt-link :to="postLink"> 
             <blockquote class="preview__text">
                 <h2>{{artigoTitulo}}</h2>
@@ -116,8 +116,8 @@
         background-color: white;
         box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
         padding: 3rem;
-        margin: 3.5rem;
-        width: 450px;
+        /* margin: 3.5rem; */
+        width: 420px;
         position: relative;
         overflow: hidden;
         display: flex;

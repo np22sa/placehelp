@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="container">
-      <div class="intro">
+      <div class="intro mr">
         <div>
           <p class="paragraph">A plataforma PLACE consiste numa diversidade de serviços e recursos destinados à Comunidade Educativa da Região Autónoma da Madeira, sobretudo ao nível da disponibilização de diversas aplicações web com vista a facilitar o processo de gestão escolar.</p>
           <p class="paragraph">O objetivo da aplicação é ajudar as escolas, fornecendo informações úteis para gestão correta das informações contidas no PLACE e promover uma partilha de informação entre os intervenientes no processo educativo na RAM</p>
@@ -78,18 +78,8 @@ computed: {
 };
 </script>
 
-<style>
-.container {
-  /* min-height: calc(100vh - 85px); */
-  display: flex;
-  /* justify-content: center; */
-  flex-flow: row;
-  /* align-items: stretch; */
-  text-align: center;
-  height: 100%;
-  font-weight: 100;
+<style scoped>
 
-}
 .paragraph {
   margin-bottom: 2rem;
     color: grey;
@@ -136,15 +126,7 @@ computed: {
 /* .links {
   padding-top: 15px;
 } */
-.intro{
-  /*introduzir flex column vh e justifycontent spacebetween*/
-  flex:1;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
-  margin: 3.5rem 0 3.5rem 3.5rem ;
-  padding: 3rem;
-  font-size: 1.2rem;
-  text-align: justify;
-}
+
 .equipa{
   font-size: 1.3rem;
   color: grey;
@@ -176,7 +158,7 @@ computed: {
   }
   .intro{
     /*display block*/
-    margin: 3.5rem;
+    margin-bottom: 1rem;
     width: 450px;
   }
   .equipa{

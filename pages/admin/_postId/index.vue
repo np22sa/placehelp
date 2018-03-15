@@ -29,6 +29,7 @@ import axios from 'axios'
             })
             .catch(e => context.error(e))
         },
+        middleware: 'auth',
         methods:{
             onSubmitted(editedPost){
                 // axios.put('https://place-63c32.firebaseio.com/posts/' + this.$route.params.postId + '.json', {...editedPost, autorData: new Date()})

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onSave">
+    <form @submit.prevent="onSave" class="post">
         <app-control-input v-model="editedPost.categoria">Categoria</app-control-input>
         <app-control-input v-model="editedPost.nivel">Nível</app-control-input>
         <!-- <app-control-input disabled v-model="editedPost.autorData">Data de publicação</app-control-input> -->
@@ -72,5 +72,15 @@
 }
 .alinhaBotoes > * {
     margin-left: 10px
+}
+.post {
+  max-width: 550px;  
+  box-sizing: border-box;
+  margin: 30px;
+  margin-top: 60px;
+  padding: 30px;
+  text-align: justify;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+  width: 100%;
 }
 </style>

@@ -67,5 +67,8 @@ module.exports = {
     transition: {
         name: 'fade',
         mode: 'out-in'
+    },
+    env: {
+        API_KEY: 'AIzaSyB5NuT5jbNcdQWOdkiIpg15uxh1ENoyK-g'
     }
 }

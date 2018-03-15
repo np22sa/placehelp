@@ -1,7 +1,7 @@
 <template>
   <div class="admin-auth-page">
     <div class="auth-container">
-      <form>
+      <form @submit.prevent="onSubmit">
           <div class="titulo">
             <Logo/>
             <div class="nav-titulo">
@@ -14,14 +14,15 @@
             </div>
         </div>
         <br><br><br>
-        <AppControlInput type="email">Email</AppControlInput>
-        <AppControlInput type="password">Password</AppControlInput>
+        <AppControlInput type="email" v-model="email">Email</AppControlInput>
+        <AppControlInput type="password" v-model="password">Password</AppControlInput>
+        <div class="enrre">{{error}}</div>
         <br>
         <div class="alinhaBotoes">
         <AppButton
           type="button"
           btn-style="normal"
-          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
+          @click="isLogin = !isLogin">Alterar para {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
           <AppButton btn-style="inverted" type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
       </div></form>
     </div>
@@ -43,8 +44,38 @@ export default {
   },
   data() {
     return {
-      isLogin: true
+      isLogin: true,
+      email:'',
+      password:'',
+      error:''
     }
+  },
+  methods: {
+    onSubmit() {
+      this.$store.dispatch("authenticateUser", {
+        isLogin: this.isLogin,
+        email: this.email,
+        password: this.password,
+        //error: this.error
+      })
+      .then(
+        ()=>{
+          if (this.$store.state.enrre==""){this.$router.push('/admin')}
+          else {this.error= this.$store.state.enrre}
+        })
+      // let authUrl='https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=';
+      // if(!this.isLogin){
+      //   authUrl='https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=';
+      // }
+      // this.$axios.$post(authUrl + process.env.API_KEY,
+      // {
+      //   email: this.email,
+      //   password: this.password,
+      //   returnSecureToken: true
+      // }
+      // ).then(res => console.log(res))
+      // .catch(e=> this.error= e.response.data.error.message)
+      }
   }
 }
 </script>
@@ -52,6 +83,7 @@ export default {
 <style scoped>
 .admin-auth-page {
     height: 100vh;
+    /*calc(100vh - 85px)*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,6 +134,11 @@ export default {
 }
 .titulo{
     display: flex;
+}
+.enrre{
+  font-size: 10px;
+  line-height: 0;
+  color: red;
 }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="posts-page">
-      <div class="intro" style="margin-right: 3.5rem">
+    <div class="posts-page container">
+      <div class="intro mb">
         <div class="input-control">
         <input type="text" v-model="search" placeholder="Procurar por palavra relacionada...">
         <button class="button--grey letrasBtn">&times;</button>

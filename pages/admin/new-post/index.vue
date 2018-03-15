@@ -15,6 +15,7 @@
         components:{
             AdminPostForm
         },
+        middleware: 'auth',
         methods:{
             onSubmitted(postData){
                 /*axios.post('https://place-63c32.firebaseio.com/posts.json', postData)

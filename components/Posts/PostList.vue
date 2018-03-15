@@ -44,6 +44,8 @@ components: {
 <style scoped>
 .lista{
   display: flex;
+  align-content: space-between;
+  justify-content: space-between;
 }
 
 </style>
