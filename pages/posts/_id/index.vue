@@ -1,6 +1,7 @@
 <template>
     <div class="single-post-page">
-        <section class="post">
+        <section class="post" :class="'categoria' + calculaCategoria">
+          <div class="conteudo">
             <h1 class="post-title">{{loadedPost.artigoTitulo}}</h1>
             <h3>{{loadedPost.hiperligacaoLegenda}}</h3>
             <div class="post-details">
@@ -15,11 +16,13 @@
             <pre class="post-content">{{loadedPost.artigoTexto}}</pre>
             <div class="post-details"></div>
             <div class="post__link">
+              
                 <a :href="loadedPost.hiperligacaoLink" :title="loadedPost.hiperligacaoLegenda" target="blank" v-if="!!loadedPost.hiperligacaoLink">&#x26D3;</a>
-                <a v-if="!!$store.state.token" :href="'/admin/' + loadedPost.id">&#x270e;</a>
+                <a v-if="!!$store.state.token" :href="'/admin/duplicate/' + loadedPost.id" title="Duplicar">&#9844;</a>
+                <a v-if="!!$store.state.token" :href="'/admin/' + loadedPost.id" title="Editar">&#x270e;</a>
               
                 <!--  &#x270e;&#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->
-            </div>            
+            </div></div>            
         </section>
         <section class="post-feedback">
 
@@ -50,7 +53,12 @@ export default {
       }
     })
     .catch(e => context.error(e))
-  }}
+  },
+  computed: {
+    calculaCategoria(){
+        if (this.loadedPost.categoria == 'Legislação') { return '2'} else if (this.loadedPost.categoria == 'Comentários') { return '1'} else {return ''}
+    }
+}}
 </script>
 
 <style scoped>
@@ -76,6 +84,8 @@ export default {
   text-align: justify;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
   width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 /* @media (min-width: 768px) {
@@ -84,7 +94,10 @@ export default {
     margin: auto;
   }
 } */
-
+.conteudo{
+  position: relative;
+  z-index: 999;
+}
 .post-title {
   color:green;
   font-size: 2rem;
@@ -134,5 +147,35 @@ export default {
 .post-feedback a:hover,
 .post-feedback a:active {
   color: salmon;
+}
+.categoria2:before{
+        content:"\201C";
+        position: absolute;
+        top: -2.75rem;
+        left: -1rem;
+        line-height: 1;
+        font-size: 20rem;
+        color: #f0f0f0;
+        font-family: sans-serif;
+}
+.categoria1:before{
+    content:"\0040";
+    position: absolute;
+    top: -1.8rem;
+    left: -1.4rem;
+    line-height: 1;
+    font-size: 8rem;
+    color: #f0f0f0;
+    font-family: sans-serif;
+}
+.categoria:before{
+    content:"\0026";
+    position: absolute;
+    top: -2.5rem;
+    left: -1rem;
+    line-height: 1;
+    font-size: 10.5rem;
+    color: #f0f0f0;
+    font-family: sans-serif;
 }
 </style>
