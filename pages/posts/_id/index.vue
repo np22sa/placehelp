@@ -18,8 +18,10 @@
             <div class="post__link">
               
                 <a :href="loadedPost.hiperligacaoLink" :title="loadedPost.hiperligacaoLegenda" target="blank" v-if="!!loadedPost.hiperligacaoLink">&#x26D3;</a>
-                <a v-if="!!$store.state.token" :href="'/admin/duplicate/' + loadedPost.id" title="Duplicar">&#9844;</a>
-                <a v-if="!!$store.state.token" :href="'/admin/' + loadedPost.id" title="Editar">&#x270e;</a>
+                <nuxt-link v-if="!!$store.state.token" :to="'/admin/duplicate/' + loadedPost.id" title="Duplicar">&#9844;</nuxt-link>
+                <!-- <a v-if="!!$store.state.token" :href="'/admin/duplicate/' + loadedPost.id" title="Duplicar">&#9844;</a> -->
+                <nuxt-link v-if="!!$store.state.token" :to="'/admin/' + loadedPost.id" title="Editar">&#x270e;</nuxt-link>
+                
               
                 <!--  &#x270e;&#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->
             </div></div>            

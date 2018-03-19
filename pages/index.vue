@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="container">
-      <div class="intro mr mb">
+      <div class="intro mr mb landing-main">
         <div>
           <p class="paragraph">A plataforma PLACE consiste numa diversidade de serviços e recursos destinados à Comunidade Educativa da Região Autónoma da Madeira, sobretudo ao nível da disponibilização de diversas aplicações web com vista a facilitar o processo de gestão escolar.</p>
           <p class="paragraph">O objetivo da aplicação é ajudar as escolas, fornecendo informações úteis para gestão correta das informações contidas no PLACE e promover uma partilha de informação entre os intervenientes no processo educativo na RAM</p>
@@ -56,7 +56,7 @@
         </div>
 
       </div>
-      <post-list orientation='column' :posts="loadedPosts" />
+      <post-list orientation='column' :posts="filteredPosts" />
     </section>
   </div>
 </template>
@@ -71,27 +71,37 @@ created() {
   this.$store.dispatch('setPosts', this.loadedPosts)
 },
 computed: {
-  loadedPosts(){
+  loadedPosts() {
     return this.$store.getters.loadedPosts
+  },
+  filteredPosts(){
+    return this.$store.getters.loadedPosts.sort((a,b)=>{return Date.parse(b.autorData) - Date.parse(a.autorData)}).slice(0,3);
   }
 }
 };
 </script>
 
 <style scoped>
+.landing-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+}
 
 .paragraph {
   margin-bottom: 2rem;
-    color: grey;
+  color: grey;
   font-style: italic
 }
 
 .cartoes{
   /* border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray; */
-  margin: 3.5rem;
-  padding-top: 2.5rem;
-  padding-bottom: 5.5rem;
+  margin: 2.5rem;
+  margin-top: 0.5rem;
+  /* padding-top: 2.5rem;
+  padding-bottom: 5.5rem; */
   display: flex;
   justify-content: space-between;
   font-weight: 100;
@@ -159,7 +169,7 @@ computed: {
   .intro{
     /*display block*/
     margin-bottom: 1rem;
-    width: 450px;
+    width: 420px;
   }
   .equipa{
     flex-direction: column;

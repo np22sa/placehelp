@@ -23,7 +23,7 @@ data() {
 computed: {
   loadedPosts(){
     var vm=this;
-    return this.$store.getters.loadedPosts.filter((cust)=>{return cust.artigoResumo.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
+    return this.$store.getters.loadedPosts.filter((cust)=>{return cust.artigoTexto.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});
   }
 }
 };

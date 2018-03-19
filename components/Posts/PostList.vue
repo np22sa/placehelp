@@ -7,12 +7,14 @@
                     :is-admin="isAdmin"
                     :categoria="post.categoria" 
                     :artigoTitulo="post.artigoTitulo"
+                    :artigoTexto="post.artigoTexto"
                     :hiperligacaoLegenda="post.hiperligacaoLegenda"
                     :hiperligacaoLink="post.hiperligacaoLink" 
                     :artigoResumo="post.artigoResumo"
                     :autorNome="post.autorNome"
                     :autorFoto="post.autorFoto" 
-                    :autorData="post.autorData" />                    
+                    :autorData="post.autorData" /> 
+      <div v-if="!!$store.state.token" class="new-post mb" @click="$router.push('/admin/new-post')" title="nova entrada">+</div> 
   </div>
 </template>
 
@@ -47,5 +49,20 @@ components: {
   align-content: space-between;
   justify-content: space-between;
 }
+.new-post {
+        background-color: white;
+        color: lightgrey;
+        font-size: 20rem;
+        line-height: 0;
+        padding-bottom: 68px;
+        cursor: pointer;
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
 
+        width: 420px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* height: 100%; */
+    }
 </style>

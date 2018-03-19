@@ -22,7 +22,7 @@ import axios from 'axios'
         asyncData(context){
             return axios.get('https://place-63c32.firebaseio.com/posts/' + context.params.postId + '.json')
             .then(res=>{
-              console.log(res.data)  
+            //   console.log(res.data)  
             return {
                 loadedPost: { 
                     ...res.data,

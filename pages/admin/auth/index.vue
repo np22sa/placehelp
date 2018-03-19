@@ -60,8 +60,12 @@ export default {
       })
       .then(
         ()=>{
-          if (this.$store.state.enrre==""){this.$router.push('/admin')}
-          else {this.error= this.$store.state.enrre}
+          if (this.$store.state.enrre==""){
+            //this.$router.push('/admin')
+            this.$router.go(-1)
+            } else {
+              this.error= this.$store.state.enrre
+              }
         })
       // let authUrl='https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=';
       // if(!this.isLogin){

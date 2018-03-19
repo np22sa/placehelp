@@ -49,7 +49,7 @@ const createStore = () => {
             },
             addPost(vuexContext, postData) {
                 return axios
-                    .post('https://place-63c32.firebaseio.com/posts.json?auth=' + vuexContext.state.token, postData)
+                    .post('https://place-63c32.firebaseio.com/posts.json?auth=' + vuexContext.state.token, {...postData, autorData: new Date() })
                     .then(res => {
                         vuexContext.commit('addPost', {...postData, id: res.data.name, autorData: new Date() })
                     })
