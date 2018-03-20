@@ -32,7 +32,8 @@ import axios from 'axios'
             onSubmitted(postData){
                 this.$store.dispatch("addPost", postData)
                 .then(() => {
-                    this.$router.push('/admin')
+                    //this.$router.push('/admin')
+                    this.$router.push('/posts')
                 })
             }
         }

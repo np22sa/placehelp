@@ -7,7 +7,7 @@
         <button class="button--grey letrasBtn" type="submit">&#x2315;</button>
       </div>
       </div>
-      <PostList orientation='row' :posts="loadedPosts" />
+      <PostList orientation='row' nova='nova' :posts="loadedPosts" />
     </div>
 </template>
 
@@ -18,7 +18,10 @@ components: {
   PostList
 },
 data() {
-  return {search:''}
+  return {
+    search:'',
+    nova: true
+    }
 },
 computed: {
   loadedPosts(){

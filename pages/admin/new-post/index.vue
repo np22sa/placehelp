@@ -23,7 +23,8 @@
                 .catch(e => console.log(e))*/
                 this.$store.dispatch("addPost", postData)
                 .then(() => {
-                    this.$router.push('/admin')
+                    //this.$router.push('/admin')
+                    this.$router.push('/posts')
                 })
             }
         }

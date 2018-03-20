@@ -19,9 +19,9 @@
                 <div class="preview__link">
                     
                     <a :href="hiperligacaoLink" :title="hiperligacaoLegenda" target="blank" v-if="!!hiperligacaoLink">&#x26D3;</a>
-                    <nuxt-link v-if="!!$store.state.token" :to="'/admin/' + id">&#x270e;</nuxt-link>
+                    <nuxt-link v-if="!!$store.state.token" :to="'/admin/' + id" title="Editar">&#x270e;</nuxt-link>
                     <!-- <a v-if="!!$store.state.token" :href="'/admin/' + id">&#x270e;</a> -->
-                    <span>&#8285;</span>
+                    <span v-else>&#8285;</span>
                     <!--  &#x270e;&#x26D3;&#8942;&#9993;&#8801;&#9776;&#9736;&#8644;&#64;&#8285;&#35;&#38;   -->
                 </div>
                 

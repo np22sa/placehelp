@@ -43,7 +43,8 @@ import axios from 'axios'
                 // .catch(e => console.log(e))
                 this.$store.dispatch("editPost", editedPost)
                 .then(() => {
-                    this.$router.push('/admin')
+                    //this.$router.push('/admin')
+                    this.$router.push('/posts')
                 })
             }
         }
