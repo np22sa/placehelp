@@ -45,23 +45,23 @@ computed: {
     height: 38px;
 }
 .input-control {
-  margin: 10px 0;
+  /* margin: 10px 0; */
   display: flex;
   justify-content: space-between;
 }
 .input-control input,
 .input-control textarea {
   display: flex;
-  width: 100%;
+  /* width: 100%;
   box-sizing: border-box;
   font: inherit;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 5px;
+  padding: 5px; */
 }
-.input-control input:focus,
+/* .input-control input:focus,
 .input-control textarea:focus {
   background-color: #eee;
   outline: none;
-}
+} */
 </style>

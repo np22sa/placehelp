@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-.input-control {
+/* .input-control {
   margin: 10px 0;
 }
 
@@ -56,7 +56,7 @@ export default {
 .input-control textarea:focus {
   background-color: #eee;
   outline: none;
-}
+} */
 </style>
 
 

@@ -49,3 +49,32 @@ em {
     font-size: 1.2rem;
     text-align: justify;
 }
+
+.input-control {
+    margin: 10px 0;
+}
+
+.input-control label {
+    display: block;
+    font-weight: bold;
+    color: #3b8070;
+}
+
+.input-control input,
+.input-control select,
+.input-control textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.input-control input:focus,
+.input-control select:focus,
+.input-control textarea:focus {
+    background-color: #eee;
+    outline: none;
+}
