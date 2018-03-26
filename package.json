@@ -1,11 +1,11 @@
 {
-    "name": "sos-place",
+    "name": "placehelp",
     "version": "1.0.0",
     "description": "Place Knowledge Base",
     "author": "Marco Olim",
     "private": true,
     "scripts": {
-        "dev": "nuxt",
+        "dev": "nuxt -p 3333",
         "build": "nuxt build",
         "start": "nuxt start",
         "generate": "nuxt generate"
