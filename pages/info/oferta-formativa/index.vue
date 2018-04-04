@@ -13,15 +13,15 @@
         <h5>TIPO DE CURSO</h5>
         <br>
         <label class="checkbox-container">Científico-Humanístico
-          <input type="checkbox" checked="checked" @click="tipoCursoFiltro('Científico-Humanístico')">
+          <input type="checkbox" @click="categoriaFiltro($event,'tipoCurso','Científico-Humanístico')">
           <span class="checkmark"></span>
         </label>
         <label class="checkbox-container">Profissionais
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" @click="categoriaFiltro($event,'tipoCurso','Profissionais')">
           <span class="checkmark"></span>
         </label> 
         <label class="checkbox-container">CEF
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" @click="categoriaFiltro($event,'tipoCurso','CEF')">
           <span class="checkmark"></span>
         </label>
         <div v-show="mostraCurso">
@@ -45,20 +45,20 @@
         <h5>CONCELHO</h5>
         <br>
         <label class="checkbox-container">Funchal
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" @click="categoriaFiltro($event,'concelho','Funchal')">
           <span class="checkmark"></span>
         </label>
         <label class="checkbox-container">Câmara de Lobos
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" @click="categoriaFiltro($event,'concelho','Câmara de Lobos')">
           <span class="checkmark"></span>
         </label> 
         <label class="checkbox-container">Santa Cruz
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" @click="categoriaFiltro($event,'concelho','Santa Cruz')">
           <span class="checkmark"></span>
         </label>
         <div v-show="mostraConcelho"> 
               <label class="checkbox-container">Ribeira Brava
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" checked="checked" >
                 <span class="checkmark"></span>
               </label>
               <label class="checkbox-container">Machico
@@ -111,6 +111,7 @@ export default {
       mostraCurso: false,
       mostraConcelho: false,
       tipoCurso:[],
+      concelho:[],
       cursos:[
         {
           concelho:'Câmara de Lobos',
@@ -134,19 +135,37 @@ export default {
     };
   },
   methods: {
-    tipoCursoFiltro(tipo){
-      console.log(tipo);
+    categoriaFiltro($event, categoria, tipo){
+      //console.log($event.toElement.checked, tipo);
+      if ($event.toElement.checked){
+        this[categoria].push(tipo)
+      } else {
+        let index = this[categoria].indexOf(tipo);
+        if (index >=-1){
+          this[categoria].splice(index,1);
+        }
+      }
+        console.log(categoria, this.tipoCurso)
+    },
+    tipoCursoFiltrado(tipo){
       if (!this.tipoCurso.length){
         return true;
       } else {
         return this.tipoCurso.find(tipoCurso => tipo.tipoCurso === tipoCurso)
+      }
+    },
+    concelhoFiltrado(tipo){
+      if (!this.concelho.length){
+        return true;
+      } else {
+        return this.concelho.find(concelho => tipo.concelho === concelho)
       }
     }
   },
   computed: {
     cursosFiltrados(){
       var vm=this;
-      return this.cursos.filter((cust)=>{return cust.nomeCurso.toLowerCase().indexOf(vm.search.toLowerCase())>=0;});//.filter(tipoCursoFiltro)
+      return this.cursos.filter((cust)=>{return cust.nomeCurso.toLowerCase().indexOf(vm.search.toLowerCase())>=0;}).filter(this.tipoCursoFiltrado).filter(this.concelhoFiltrado)
     }
   }
 };
