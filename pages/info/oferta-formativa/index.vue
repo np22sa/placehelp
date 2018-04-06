@@ -2,11 +2,10 @@
     <div class="posts-page container">
       <div class="intro mb">
         <div class="input-control">
-        <input type="text" v-model="search" placeholder="Procurar por palavra relacionada...">
+        <input type="text" v-model="search" placeholder="Procurar por curso ou escola...">
         <button class="button--grey letrasBtn">&times;</button>
         <button class="button--grey letrasBtn" type="submit">&#x2315;</button>
       </div>
-
     </div>
     <div class="listas">
       <div class="filtros intro mr">
@@ -26,15 +25,15 @@
         </label>
         <div v-show="mostraCurso">
           <label class="checkbox-container">CEF Adultos
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" @click="categoriaFiltro($event,'tipoCurso','CEFA')">
             <span class="checkmark"></span>
           </label>
           <label class="checkbox-container">Formação Modular
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" @click="categoriaFiltro($event,'tipoCurso','Formação Modular')">
             <span class="checkmark"></span>
           </label>         
           <label class="checkbox-container">Curso de Aprendizagem
-            <input type="checkbox" checked="checked">
+            <input type="checkbox" @click="categoriaFiltro($event,'tipoCurso','Curso de Aprendizagem')">
             <span class="checkmark"></span>
           </label>
         </div>
@@ -58,35 +57,35 @@
         </label>
         <div v-show="mostraConcelho"> 
               <label class="checkbox-container">Ribeira Brava
-                <input type="checkbox" checked="checked" >
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Ribeira Brava')" >
                 <span class="checkmark"></span>
               </label>
               <label class="checkbox-container">Machico
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Machico')">
                 <span class="checkmark"></span>
               </label>         
               <label class="checkbox-container">Ponta do Sol
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Ponta do Sol')">
                 <span class="checkmark"></span>
               </label>
               <label class="checkbox-container">Calheta
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Calheta')">
                 <span class="checkmark"></span>
               </label>
               <label class="checkbox-container">Porto Moniz
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Porto Moniz')">
                 <span class="checkmark"></span>
               </label>         
               <label class="checkbox-container">São Vicente
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','São Vicente')">
                 <span class="checkmark"></span>
               </label> 
               <label class="checkbox-container">Santana
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Santana')">
                 <span class="checkmark"></span>
               </label>         
               <label class="checkbox-container">Porto Santo
-                <input type="checkbox" checked="checked">
+                <input type="checkbox" @click="categoriaFiltro($event,'concelho','Porto Santo')">
                 <span class="checkmark"></span>
               </label>                            
         </div> 
@@ -95,15 +94,25 @@
         </div>
       </div>
       <div class="intro painel-lista">
-        <div class="" v-for="(curso, index) in cursosFiltrados" :key="index">
-          {{curso.nomeCurso}}
-          <hr>
+        <div class="ficha-lista" v-for="(curso, index) in cursosFiltrados" :key="index">
+          <!-- <img :src="imageUrl" alt="" class="preview__photo"> -->
+          <div>
+            {{curso.nomeCurso}}
+            <p>{{curso.escola}}</p>
+          </div>
+          <div class="ficha-lista__link">
+             <!--a :href="curso.hiperligacaoLink" :title="curso.hiperligacaoLink" target="blank" >&#x26D3;</a>
+             <span style="font-size: 1rem; margin-top:2px">&#x26D3;</span> &emsp;<span style="font-size: 1.2rem">&#10224;</span> &emsp; <span  style="font-size: 1.5rem; margin-top:-3px;">&#9734;</span>--> 
+             <span v-if="!curso.favorito" @click="$store.dispatch('editFavoritos', curso.favorito=!curso.favorito)">&#9734;</span>
+             <span v-else @click="$store.dispatch('editFavoritos', curso.favorito=!curso.favorito)">&#9733;</span>
+          </div>
         </div>
       </div>
     </div>      
     </div>
 </template>
 <script>
+
 export default {
   data() {
     return {
@@ -117,6 +126,8 @@ export default {
           concelho:'Câmara de Lobos',
           escola:'Escola Básica 123/PE e Creche do Curral das Freiras',
           tipoCurso:'Profissionais',
+          url:'',
+          foto:'',
           nomeCurso:'Técnico de Turismo Ambiental e Rural'
         },
         {
@@ -124,6 +135,12 @@ export default {
           escola:'Conservatório + Escola Profissional de Artes',
           tipoCurso:'Profissionais',
           nomeCurso:'Curso Profissional Instrumentista de Jazz (NOVO)'
+        },
+        {
+          concelho:'Santa Cruz',
+          escola:'Escola Básica e Secundária de Santa Cruz',
+          tipoCurso:'Científico-Humanístico',
+          nomeCurso:'Científico-Humanístico de Ciências e Tecnologias'
         },
         {
           concelho:'Santa Cruz',
@@ -165,18 +182,52 @@ export default {
   computed: {
     cursosFiltrados(){
       var vm=this;
-      return this.cursos.filter((cust)=>{return cust.nomeCurso.toLowerCase().indexOf(vm.search.toLowerCase())>=0;}).filter(this.tipoCursoFiltrado).filter(this.concelhoFiltrado)
+      return this.$store.getters.ofertaFormativa
+                        .filter((cust)=>{return cust.nomeCurso.toLowerCase().indexOf(vm.search.toLowerCase())>=0 | cust.escola.toLowerCase().indexOf(vm.search.toLowerCase())>=0})
+                        .filter(this.tipoCursoFiltrado)
+                        .filter(this.concelhoFiltrado)
+                        //.filter((v.nomeCurso, i, a) => a.indexOf(v) === i);
     }
   }
 };
 </script>
 <style scoped>
+.preview__photo {
+    box-sizing: content-box;
+    border-radius: 50%;
+    margin-right: 1.5rem; 
+    width: 50px;
+    height: 50px;
+    border: 3px solid green;
+}
 .listas{
   display: flex;
   justify-content: flex-start;
 }
 .painel-lista{
   flex: 1;
+}
+.ficha-lista{
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  /* justify-content: space-between; */
+}
+.ficha-lista p{
+  font-size: 0.9rem;
+  color: lightgrey;
+}
+.ficha-lista__link  {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: green;
+    line-height: 0;
+    cursor: pointer;
+    font-size: 2.2rem;
+    font-weight: 300;
 }
 .posts-page {
   display: flex;

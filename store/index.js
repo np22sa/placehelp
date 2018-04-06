@@ -7,6 +7,7 @@ const createStore = () => {
         state: {
             loadedPosts: [],
             token: null,
+            ofertaFormativa: [],
             enrre: ''
         },
         mutations: {
@@ -30,17 +31,34 @@ const createStore = () => {
             },
             setEnrre(state, enrre) {
                 state.enrre = enrre
-            }
+            },
+            setFormativa(state, formativa) {
+                state.ofertaFormativa = formativa
+            },
+            addFormativa(state, formativa) {
+                state.ofertaFormativa.push(formativa)
+            },
+            editFormativa(state, editedFormativa) {
+                const formativaIndex = state.ofertaFormativa.findIndex(
+                    formativa => formativa.id === editedFormativa.id
+                );
+                state.ofertaFormativa[formativaIndex] = editedFormativa
+            },
         },
         actions: {
             nuxtServerInit(vuexContext, context) {
-                return axios.get('https://place-63c32.firebaseio.com/posts.json')
+                return axios.get('https://place-63c32.firebaseio.com/.json')
                     .then(res => {
-                        const postsArray = []
-                        for (const key in res.data) {
-                            postsArray.push({...res.data[key], id: key })
+                        const postsArray = [];
+                        const formativaArray = [];
+                        for (const key in res.data.posts) {
+                            postsArray.push({...res.data.posts[key], id: key })
+                        };
+                        for (const key in res.data.formativa) {
+                            formativaArray.push({...res.data.formativa[key], id: key, favorito: false })
                         }
-                        vuexContext.commit('setPosts', postsArray)
+                        vuexContext.commit('setPosts', postsArray);
+                        vuexContext.commit('setFormativa', formativaArray);
                     })
                     .catch(e => context.error(e))
             },
@@ -62,6 +80,29 @@ const createStore = () => {
                         vuexContext.commit('editPost', {...editedPost, autorData: new Date() })
                     })
                     .catch(e => console.log(e))
+            },
+            setFormativa(vuexContext, formativa) {
+                vuexContext.commit('setFormativa', formativa)
+            },
+            addFormativa(vuexContext, postData) {
+                return axios
+                    .post('https://place-63c32.firebaseio.com/formativa.json?auth=' + vuexContext.state.token, postData)
+                    .then(res => {
+                        vuexContext.commit('addFormativa', {...postData, id: res.data.name, favorito: false })
+                    })
+                    .catch(e => console.log(e))
+            },
+            editFormativa(vuexContext, editedPost) {
+                //falta implementar
+                return axios
+                    .put('https://place-63c32.firebaseio.com/formativa/' + editedPost.id + '.json?auth=' + vuexContext.state.token, {...editedPost, autorData: new Date() })
+                    .then(res => {
+                        vuexContext.commit('editFormativa', {...editedPost, autorData: new Date() })
+                    })
+                    .catch(e => console.log(e))
+            },
+            editFavoritos(vuexContext, editedFormativa) {
+                vuexContext.commit('editFormativa', editedFormativa)
             },
             authenticateUser(vuexContext, authData) {
                 let authUrl = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=';
@@ -136,6 +177,9 @@ const createStore = () => {
             },
             isAuthenticated(state) {
                 return state.token != null
+            },
+            ofertaFormativa(state) {
+                return state.ofertaFormativa
             }
         }
     })
